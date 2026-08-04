@@ -28,7 +28,6 @@ def obtener_datos_publicos():
         "User-Agent": "MiProyectoBaseDatos/1.0"
     }
     
-    # Pasamos los parámetros de forma estructurada para evitar errores de codificación HTTP
     response = requests.get(url, params=params, headers=headers, timeout=10)
     
     if response.status_code == 200:
