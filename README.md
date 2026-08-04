@@ -1,21 +1,27 @@
-# Extractor y Almacenador de Datos Públicos en MySQL Remoto
+# Extractor y Almacenador Multivariable de Datos Atmosféricos en MySQL Remoto
 
 ## Descripción
-Este proyecto consiste en un servicio automatizado en Python que realiza peticiones periódicas a la API pública de **Open-Meteo** para obtener mediciones atmosféricas en tiempo real (temperatura en °C) y las almacena de manera estructurada e incremental en una base de datos **MySQL** alojada en la nube mediante el servicio de hosting **AlwaysData** (administrada visualmente vía **phpMyAdmin**).
+Este proyecto consiste en un servicio automatizado e interactivo en Python que consulta en tiempo real variables meteorológicas de cualquier ubicación geográfica utilizando la API pública de **Open-Meteo**. El script traduce coordenadas (latitud y longitud) al nombre de la ubicación mediante geocodificación inversa (**Nominatim / OpenStreetMap**) y almacena las mediciones de forma estructurada e incremental en una base de datos **MySQL** remota alojada en **AlwaysData**.
 
-El sistema implementa buenas prácticas de desarrollo para la gestión segura de credenciales mediante el uso de variables de entorno y archivos de configuración excluidos del control de versiones.
+El sistema almacena múltiples variables atmosféricas (`temperatura_c`, `humedad_pct`, `viento_kmh`, `presion_hpa`).
 
 ---
 
 ## Arquitectura del Sistema
 ```text
-[ API Pública: Open-Meteo ] 
-         │
-         ▼ (Petición HTTP GET / JSON)
-[ Script Python: main.py ] 
-         │
-         ▼ (Conexión TCP/IP MySQL - Puerto 3306)
-[ MySQL DB / phpMyAdmin en AlwaysData ]
+[ Entrada del Usuario: Coordenadas (Lat/Lon) ]
+                       │
+                       ▼
+[ API Geocodificación: Nominatim / OSM ] ──► (Obtiene Nombre de la Ciudad)
+                       │
+                       ▼
+[ API Meteorológica: Open-Meteo ] ─────────► (Consulta Multivariable)
+                       │
+                       ▼ (Extracción JSON)
+             [ Script Python: main.py ]
+                       │
+                       ▼ (Conexión TCP/IP MySQL - Puerto 3306)
+     [ MySQL DB / phpMyAdmin en AlwaysData ]
 ```
 
 ---
@@ -36,7 +42,15 @@ cp .env.example .env
 ```
 
 3. Completar las credenciales correspondientes a la base de datos en el archivo `.env`.
+```bash
+    DB_HOST=tu_host_aqui
+    DB_USER=tu_usuario_aqui
+    DB_PASSWORD=tu_password_aqui
+    DB_NAME=tu_nombre_db_aqui
+    DB_PORT=3306   
+```
 
+---
 
 ## Ejecución
 ```bash
