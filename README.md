@@ -56,3 +56,18 @@ cp .env.example .env
 ```bash
 python main.py
 ```
+Ingresar Latitud y Longitud deseadas:
+
+```bash
+=== Configuración del Nodo de Monitoreo Atmosférico ===
+Ingresa la latitud (ej. 14.63 para Cd. Guatemala): 35.67
+Ingresa la longitud (ej. -90.51): 139.65
+Obteniendo nombre del lugar...
+
+Ubicación confirmada: Setagaya, Japón
+Servicio activo. Guardando datos cada 60 segundos...
+
+[17:14:11] 📍 Setagaya, Japón
+ ├─ Temp: 22.7 °C | Humedad: 82 %
+ └─ Viento: 6.5 km/h | Presión: 1007.3 hPa
+ ```
