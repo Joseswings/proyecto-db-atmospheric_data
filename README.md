@@ -21,7 +21,7 @@ El sistema almacena múltiples variables atmosféricas (`temperatura_c`, `humeda
              [ Script Python: main.py ]
                        │
                        ▼ (Conexión TCP/IP MySQL - Puerto 3306)
-     [ MySQL DB / phpMyAdmin en AlwaysData ]
+                [ MySQL DB ]
 ```
 
 ---
